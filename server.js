@@ -39,6 +39,7 @@ console.log("Admin routes registered");
 // Make Socket.IO available to routes
 app.set('io', io);
 
-server.listen(5000, () => {
-    console.log('Server running on port 5000');
+const PORT = process.env.PORT || 5001;
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

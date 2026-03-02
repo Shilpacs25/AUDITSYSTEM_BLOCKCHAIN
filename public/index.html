@@ -9,6 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     /* =========================================
        NEW THEME: Deep Purple Future
@@ -756,47 +757,21 @@
         <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
         AUDIT<span class="text-yellow-400">OS</span>
       </div>
-      <div class="hidden md:flex items-center gap-8 text-sm">
-        <a href="#" class="nav-link">Ledger Hub</a>
-        <a href="#" class="nav-link">Verification Engine</a>
-        <a href="#" class="nav-link">Audit Monitoring</a>
-        <a href="#" class="nav-link">Security Protocol</a>
-      </div>
-      <button class="btn-hero text-xs uppercase tracking-widest hidden md:block">
-        Connect Wallet
-      </button>
+
     </nav>
 
     <!-- HERO SECTION -->
     <section class="flex-1 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-12 w-full">
       <!-- Left Text -->
       <div class="md:w-1/2 space-y-8 animate-in slide-in-from-left duration-700">
-        <div
-          class="inline-block px-3 py-1 rounded bg-white/10 border border-white/20 text-yellow-400 text-[10px] font-bold uppercase tracking-widest">
-          Enterprise Blockchain Ledger V2.0
-        </div>
         <h1 class="text-6xl md:text-7xl font-bold text-white leading-tight">
-          Immutable <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Audit
-            Platform</span>
+          Blockchain -Integrated Corporate Audit System
         </h1>
         <p class="text-lg text-slate-400 max-w-lg leading-relaxed font-medium">
           Secure your enterprise data with our hybrid cryptographically anchored ledger.
           Real-time tampering detection, automated compliance, and zero-knowledge proof verification.
         </p>
-        <div class="flex items-center gap-6 pt-6">
-          <button onclick="document.getElementById('portal-cards').scrollIntoView({behavior: 'smooth'})"
-            class="btn-hero">
-            Get Started
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </button>
-          <button
-            class="px-8 py-3.5 rounded-full border border-white/10 text-white font-bold text-[11px] uppercase tracking-widest hover:bg-white/5 transition-all">
-            Read Whitepaper
-          </button>
-        </div>
+
       </div>
 
       <!-- Right Image -->
@@ -1059,36 +1034,28 @@
       </div>
     </div>
 
+    <!-- ADMIN TABS -->
+    <div class="flex gap-2 border-b border-white/5 mb-6">
+      <button onclick="switchAdminTab('Pending')" id="adminTabPending"
+        class="px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-500 border-b-2 border-indigo-500 transition-all hover:bg-white/5">Pending
+        Approval</button>
+      <button onclick="switchAdminTab('Tampered')" id="adminTabTampered"
+        class="px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 border-b-2 border-transparent hover:text-red-400 transition-all hover:bg-white/5">Tampered
+        Records</button>
+      <button onclick="switchAdminTab('Completed')" id="adminTabCompleted"
+        class="px-8 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 border-b-2 border-transparent hover:text-emerald-400 transition-all hover:bg-white/5">Completed</button>
+    </div>
+
+    <!-- TRANSACTION MANAGEMENT LIST -->
+    <div id="adminTxList" class="grid grid-cols-1 gap-6 mb-10">
+      <!-- Cards injected via JS -->
+    </div>
+
     <!-- Main Grid -->
     <div class="grid grid-cols-12 gap-6">
 
-      <!-- COLUMN 1: INTEGRITY GAUGE -->
-      <div class="col-span-12 lg:col-span-3">
-        <div class="dashboard-card p-8 h-full flex flex-col items-center justify-center text-center glow-red">
-          <div class="gauge-container mb-8">
-            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"
-                stroke-dasharray="283" stroke-dashoffset="0" />
-              <circle id="healthCircle" cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="6"
-                stroke-dasharray="283" stroke-dashoffset="200"
-                class="gauge-progress text-red-500 transition-all duration-1000" />
-            </svg>
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-              <span id="healthPercentage" class="text-4xl font-black text-white">27%</span>
-              <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Integrity Score</span>
-            </div>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-1">Chain Verification</h3>
-          <p id="ledgerStatus" class="text-red-500 text-[10px] font-bold uppercase tracking-widest mb-6">Compromised</p>
-          <button
-            class="px-8 py-2 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-[10px] font-bold uppercase tracking-widest hover:bg-red-500/20 transition-all">
-            Investigate
-          </button>
-        </div>
-      </div>
-
       <!-- COLUMN 2: KPI COMBO & SECURITY EVENT MONITOR -->
-      <div class="col-span-12 lg:col-span-6 flex flex-col gap-6">
+      <div class="col-span-12 flex flex-col gap-6">
         <!-- Small KPI Header -->
         <div class="grid grid-cols-2 gap-6">
           <div class="dashboard-card p-6 flex items-center gap-5">
@@ -1140,10 +1107,12 @@
               <thead
                 class="bg-[#111827] text-slate-500 uppercase font-black tracking-widest sticky top-0 z-10 border-b border-white/5">
                 <tr>
-                  <th class="px-6 py-3 bg-[#111827]">Ref ID</th>
-                  <th class="px-4 py-3 bg-[#111827]">Anomaly Type</th>
-                  <th class="px-4 py-3 bg-[#111827]">Severity</th>
-                  <th class="px-6 py-3 text-right bg-[#111827]">Timestamp</th>
+                  <th class="px-6 py-3 bg-[#111827]">ID</th>
+                  <th class="px-4 py-3 bg-[#111827]">DB Status</th>
+                  <th class="px-4 py-3 bg-[#111827]">Date</th>
+                  <th class="px-4 py-3 bg-[#111827]">Amount</th>
+                  <th class="px-4 py-3 bg-[#111827]">Category</th>
+                  <th class="px-4 py-3 bg-[#111827]">Biz ID</th>
                 </tr>
               </thead>
               <tbody id="adminTamperTable" class="divide-y divide-white/5 text-slate-400">
@@ -1165,36 +1134,7 @@
         </div>
       </div>
 
-      <!-- COLUMN 3: VERTICAL KPI STACK -->
-      <div class="col-span-12 lg:col-span-3 flex flex-col gap-6">
-        <div class="dashboard-card p-6 flex-grow flex flex-col justify-center border-l-4 border-l-blue-500">
-          <div class="flex items-center gap-3 mb-4 text-blue-400">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Verified Records</span>
-          </div>
-          <div class="flex items-baseline gap-2">
-            <span id="adminVerified" class="text-4xl font-black text-white">4</span>
-            <span class="text-[9px] text-blue-500/80 font-bold uppercase tracking-tighter">Cryptographically
-              Valid</span>
-          </div>
-        </div>
-        <div class="dashboard-card p-6 flex-grow flex flex-col justify-center border-l-4 border-l-red-500 glow-red">
-          <div class="flex items-center gap-3 mb-4 text-red-500">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Integrity Violations</span>
-          </div>
-          <div class="flex items-baseline gap-2">
-            <span id="adminTampered" class="text-4xl font-black text-white">11</span>
-            <span class="text-[9px] text-red-500 font-bold uppercase tracking-tighter">Critical Alerts</span>
-          </div>
-        </div>
-      </div>
+
     </div>
 
     <!-- User Directory Selection -->
@@ -1223,7 +1163,6 @@
               <th class="px-6 py-4 bg-[#111827]">Auth Status</th>
               <th class="px-6 py-4 bg-[#111827]">Last Access</th>
               <th class="px-6 py-4 bg-[#111827]">Scope</th>
-              <th class="px-6 py-4 text-right bg-[#111827]">Administrative Actions</th>
             </tr>
           </thead>
           <tbody id="userTable" class="divide-y divide-white/5 text-slate-400">
@@ -1233,257 +1172,269 @@
       </div>
     </div>
   </div>
-  <!-- ================= AUDITOR INTERFACE ================= -->
-  <div id="auditorSection" class="hidden p-8 max-w-[1500px] mx-auto space-y-8 animate-in fade-in duration-500">
+  </div> <!-- End Id AdminSection -->
 
-    <!-- Auditor Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-      <div>
-        <div class="text-[10px] font-bold text-yellow-400 uppercase tracking-[0.2em] mb-2 font-mono">Compliance Utility
-        </div>
-        <h1 class="text-4xl font-bold tracking-tight text-white mb-0">Ledger Verification</h1>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-4">
-        <button onclick="generateBlockchain()"
-          class="flex items-center gap-3 px-6 py-2.5 rounded-xl bg-yellow-400 text-[#1a103c] text-[10px] font-black uppercase tracking-widest transition-all shadow-xl shadow-yellow-400/20 hover:scale-[1.02] active:scale-95">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM5.833 6.017a1 1 0 00-1.667-1.15l-.713.988a1 1 0 001.667 1.15l.713-.988zM4.167 11a1 1 0 100-2h-1a1 1 0 100 2h1zM5.833 15.983a1 1 0 101.667-1.15l-.713-.988a1 1 0 11-1.667 1.15l.713.988zM11 18a1 1 0 10-2 0v-1a1 1 0 102 0v1zM15.833 15.017a1 1 0 10-1.667 1.15l.713.988a1 1 0 001.667-1.15l-.713-.988zM16.833 11a1 1 0 100-2h-1a1 1 0 100 2h1zM15.833 6.017a1 1 0 001.667-1.15l-.713-.988a1 1 0 10-1.667 1.15l.713.988z" />
+  <!-- ================= AUDIT HISTORY MODAL ================= -->
+  <div id="historyModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-[#0a051d]/90 backdrop-blur-xl" onclick="closeHistoryModal()"></div>
+    <div
+      class="relative w-full max-w-3xl bg-slate-900 border border-white/10 rounded-2xl shadow-2xl animate-in fade-in zoom-in duration-300 max-h-[80vh] overflow-hidden flex flex-col">
+      <div class="px-8 py-6 border-b border-white/10 bg-gradient-to-r from-indigo-500/10 to-purple-500/10">
+        <h3 class="text-2xl font-black text-white flex items-center gap-3">
+          <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          Anchor Records
-        </button>
-        <button onclick="runIntegrityCheck()"
-          class="px-6 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all">
-          Invoke Integrity Scan
-        </button>
-        <button onclick="showTamperedOnly()"
-          class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-black uppercase tracking-widest hover:bg-red-500/20 transition-all">
-          <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
-          Flagged <span id="flagCount" class="ml-1 opacity-60">--</span>
-        </button>
-        <button onclick="showAllLogs()"
-          class="px-6 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-400 text-[10px] font-black uppercase tracking-widest hover:text-white transition-all">
-          Full History
-        </button>
+          Audit History Trail
+        </h3>
+        <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-bold">Transaction: <span id="historyTxId"
+            class="text-indigo-400">--</span></p>
+      </div>
+      <div id="historyContent" class="flex-1 overflow-y-auto p-8 space-y-4">
+        <!-- Timeline injected via JS -->
+      </div>
+      <div class="px-8 py-4 border-t border-white/10 bg-white/2 flex justify-end">
+        <button onclick="closeHistoryModal()"
+          class="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-black uppercase tracking-widest transition-all shadow-lg">OK</button>
       </div>
     </div>
+  </div>
 
-    <!-- Filter & Search Bar -->
-    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
-      <div class="relative w-full md:w-[450px]">
-        <input type="text" placeholder="Search logs..." class="tactical-search w-full pl-10 pr-12">
-        <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" fill="none" stroke="currentColor"
-          viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <button class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M4 4v5h.055M20 20v-5h-.055M9 20H4v-5M15 4h5v5M4 9a8 8 0 0115.69-3.23m-1.69 12.39a8 8 0 01-15.69 3.23" />
-          </svg>
-        </button>
-      </div>
-      <div class="flex items-center gap-3 w-full md:w-auto">
-        <div class="relative flex-grow md:flex-grow-0">
-          <button
-            class="w-full md:w-48 flex justify-between items-center bg-white/2 border border-white/5 rounded-xl px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:border-white/10 transition-all">
-            Filter Logs
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-        </div>
-        <div class="relative flex-grow md:flex-grow-0 text-white/40 font-black">
-          <button
-            class="w-full md:w-48 flex justify-between items-center bg-white/2 border border-white/5 rounded-xl px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:border-white/10 transition-all">
-            <span>All Status <span id="totalLogCount" class="ml-2 text-slate-600">380</span></span>
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Log Table -->
-    <div class="dashboard-card overflow-hidden">
-      <div id="statusText_auditor"
-        class="hidden bg-red-500/90 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest">
-        System Alert: Cryptographic Mismatch Detected
-      </div>
-      <div class="overflow-x-auto min-h-[500px]">
-        <table class="w-full text-left text-[11px]">
-          <thead class="bg-white/2 text-slate-500 uppercase font-black tracking-widest border-b border-white/5">
-            <tr>
-              <th class="px-8 py-5">Internal Log ID</th>
-              <th class="px-6 py-5">Operation Handle</th>
-              <th class="px-6 py-5">Transaction Reference</th>
-              <th class="px-8 py-5">Verification Status</th>
-              <th class="px-8 py-5 text-right">Action</th>
-            </tr>
-          </thead>
-          <tbody id="logTable" class="divide-y divide-white/5 text-slate-400">
-            <!-- Data injected via JS -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Footer Pagination -->
-      <div class="px-8 py-5 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-          Showing <span class="text-white">1</span> to <span class="text-white">10</span> of <span id="totalRecords"
-            class="text-white">30</span> records
-        </div>
-        <div class="flex items-center gap-2">
-          <button
-            class="px-4 py-2 rounded-lg bg-white/2 border border-white/5 text-[9px] font-bold text-slate-500 uppercase tracking-widest hover:text-white transition-all">Prev</button>
-          <div class="flex gap-1">
-            <button
-              class="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-500/40 text-[9px] font-bold text-blue-400 uppercase">1</button>
-            <button
-              class="w-8 h-8 rounded-lg bg-white/2 border border-white/5 text-[9px] font-bold text-slate-500 uppercase hover:text-white transition-all">2</button>
-            <button
-              class="w-8 h-8 rounded-lg bg-white/2 border border-white/5 text-[9px] font-bold text-slate-500 uppercase">...</button>
+  <!-- ================= HASH COMPARISON MODAL ================= -->
+  <div id="hashModal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeHashModal()"></div>
+    <div class="relative w-full max-w-xl bg-slate-900 border border-red-500/30 rounded-2xl shadow-2xl p-8 space-y-6">
+      <h3 class="text-xl font-black text-white flex items-center gap-2">
+        <span class="text-red-500">🔍</span> Cryptographic Hash Comparison
+      </h3>
+      <div class="space-y-4">
+        <div class="p-4 bg-black/40 rounded-lg border border-white/5">
+          <div class="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-2">Original (Blockchain) Hash
           </div>
-          <button
-            class="px-4 py-2 rounded-lg bg-white/2 border border-white/5 text-[9px] font-bold text-slate-500 uppercase tracking-widest hover:text-white transition-all">Next</button>
+          <div id="expectedHash" class="font-mono text-xs text-slate-400 break-all leading-relaxed"></div>
         </div>
+        <div class="p-4 bg-black/40 rounded-lg border border-red-500/20">
+          <div class="text-[10px] font-black text-red-500 uppercase tracking-widest mb-2">Current (Database) Hash</div>
+          <div id="foundHash" class="font-mono text-xs text-slate-400 break-all leading-relaxed"></div>
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button onclick="closeHashModal()"
+          class="px-6 py-2 bg-slate-800 text-white rounded font-bold text-xs uppercase tracking-widest">Close
+          Analysis</button>
       </div>
     </div>
   </div>
-  </tbody>
-  </table>
-  </div>
-  </div>
-  </div>
+  <section id="businessSection" class="hidden p-8 max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
+    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+      <h2 class="text-3xl font-bold text-emerald-400">Business Dashboard</h2>
+      <button onclick="logout()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded text-sm transition">Logout /
+        Switch
+        Role</button>
+    </div>
 
-  <!-- ================= BUSINESS EVIDENCE UTILITY ================= -->
-  <div id="businessSection"
-    class="hidden min-h-[80vh] flex items-center justify-center px-6 py-12 animate-in fade-in duration-500">
-    <div class="w-full max-w-xl">
+    </div>
+
+    <!-- BUSINESS TABS -->
+    <div class="flex gap-4 border-b border-white/5 pb-2">
+      <button onclick="switchBusinessTab('Upload')" id="bizTabUpload"
+        class="px-6 py-2 text-xs font-black uppercase tracking-widest text-emerald-500 border-b-2 border-emerald-500 transition-all">Create
+        New</button>
+      <button onclick="switchBusinessTab('Correction')" id="bizTabCorrection"
+        class="px-6 py-2 text-xs font-black uppercase tracking-widest text-slate-500 border-b-2 border-transparent transition-all hover:text-red-400">Fixed/Correction
+        <span id="correctionBadge"
+          class="hidden ml-1 px-1.5 py-0.5 bg-red-500 text-white rounded-full text-[8px]">0</span></button>
+    </div>
+
+    <!-- NEW ENTRY VIEW -->
+    <div id="bizUploadView" class="space-y-8">
+      <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl">
+        <h3 class="text-xl font-semibold mb-4 text-emerald-400">1️⃣ Transaction Details</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label class="text-xs text-slate-400 uppercase tracking-wider">Amount</label>
+            <input id="amount" type="number" placeholder="0.00"
+              class="w-full p-3 bg-slate-950 rounded border border-slate-800 focus:ring-2 ring-emerald-500 outline-none transition">
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs text-slate-400 uppercase tracking-wider">Category</label>
+            <input id="category" placeholder="e.g. IT Services"
+              class="w-full p-3 bg-slate-950 rounded border border-slate-800 focus:ring-2 ring-emerald-500 outline-none transition">
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs text-slate-400 uppercase tracking-wider">Status</label>
+            <input id="status" value="Created"
+              class="w-full p-3 bg-slate-950 rounded border border-slate-800 focus:ring-2 ring-emerald-500 outline-none transition">
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs text-slate-400 uppercase tracking-wider">Date</label>
+            <input id="date" type="date"
+              class="w-full p-3 bg-slate-950 rounded border border-slate-800 focus:ring-2 ring-emerald-500 outline-none transition">
+          </div>
+          <div class="space-y-2 col-span-full">
+            <label class="text-xs text-slate-400 uppercase tracking-wider">Description</label>
+            <textarea id="description" rows="2"
+              class="w-full p-3 bg-slate-950 rounded border border-slate-800 focus:ring-2 ring-emerald-500 outline-none transition"
+              placeholder="Purpose of transaction..."></textarea>
+          </div>
+        </div>
+        <button onclick="createTransaction()"
+          class="mt-6 w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold transition-all shadow-lg active:scale-95">Submit
+          & Store on Blockchain</button>
+        <div id="txResponseContainer" class="hidden mt-6">
+          <p class="text-xs font-bold text-emerald-500 mb-2 uppercase tracking-widest">Success: Blockchain Receipt
+            Generated</p>
+          <pre id="txJsonResponse"
+            class="p-4 bg-black text-emerald-400 text-xs overflow-auto rounded-lg border border-emerald-900/30 font-mono leading-relaxed"></pre>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 shadow-xl">
+        <h3 class="text-xl font-semibold mb-4 text-blue-400">2️⃣ Evidence Documentation</h3>
+        <p id="uploadWarning"
+          class="bg-blue-900/20 text-blue-400 p-3 rounded-lg text-sm mb-4 border border-blue-900/50">
+          🔒
+          You must
+          submit a transaction first to unlock evidence uploading.</p>
+        <div id="evidenceForm">
+          <input id="e_file" type="file" disabled
+            class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-slate-300 hover:file:bg-slate-700 cursor-not-allowed opacity-40 transition-all">
+          <div class="flex flex-col sm:flex-row gap-4 mt-3">
+            <button id="uploadBtn" type="button" onclick="uploadEvidence()" disabled
+              class="flex-1 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-bold opacity-40 cursor-not-allowed transition-all active:scale-95">Upload
+              to Secure Storage</button>
+          </div>
+        </div>
+        <div id="evResponseContainer" class="hidden mt-6">
+          <p class="text-sm font-bold text-blue-400 mb-2 uppercase tracking-widest">Evidence Successfully Uploaded
+          </p>
+          <div id="evResponseText" class="bg-slate-800 p-4 rounded-lg border border-blue-900/30 space-y-1 text-sm">
+          </div>
+          <button id="downloadReceiptBtn" type="button" onclick="generateProfessionalReceipt()"
+            class="mt-3 w-full py-3 bg-white hover:bg-slate-200 text-slate-900 rounded-lg font-bold flex items-center justify-center gap-2 transition-all shadow-lg">📥
+            Download Official Receipt (PDF)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CORRECTION VIEW -->
+    <div id="bizCorrectionView" class="hidden space-y-6">
+      <div id="correctionList" class="grid grid-cols-1 gap-6">
+        <!-- Correction cards injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AUDITOR DASHBOARD (New Feature) ================= -->
+  <section id="auditorSection" class="hidden p-8 max-w-7xl mx-auto space-y-8">
+    <!-- Header -->
+    <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+      <div class="flex items-center gap-3">
+        <h2 class="text-3xl font-bold text-indigo-400">Auditor Console</h2>
+        <span
+          class="px-2 py-1 rounded bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-widest border border-indigo-500/30">Secure
+          Access</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-6">
+          <div id="blockchainHealth"
+            class="hidden flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+            <span class="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+            <span class="text-[10px] font-black text-yellow-500 uppercase tracking-widest">Unanchored Records
+              Detected</span>
+            <button onclick="repairBlockchain()"
+              class="ml-2 text-[10px] font-black text-white bg-yellow-600 px-2 py-0.5 rounded hover:bg-yellow-700 transition-colors">Repair
+              Connection</button>
+          </div>
+          <button onclick="fetchAuditorTransactions(true)"
+            class="group flex items-center gap-3 px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
+            <svg class="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+              </path>
+            </svg>
+            <span class="text-xs uppercase tracking-[0.2em]">Invoke Integrity Scan</span>
+          </button>
+        </div>
+        <button onclick="logout()"
+          class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs transition font-bold text-slate-300 border border-slate-700">Logout
+          /
+          Switch Role</button>
+      </div>
+    </div>
+
+    <!-- Stats / Overview (Optional) -->
+
+    <!-- TABS -->
+    <div class="flex gap-2 border-b border-slate-800">
+      <button onclick="switchAuditorTab('Pending')" id="tabPending"
+        class="px-6 py-3 text-sm font-bold uppercase tracking-widest text-indigo-400 border-b-2 border-indigo-500 transition-all hover:bg-slate-800/50">Pending</button>
+      <button onclick="switchAuditorTab('Verified')" id="tabVerified"
+        class="px-6 py-3 text-sm font-bold uppercase tracking-widest text-slate-500 border-b-2 border-transparent hover:text-indigo-300 transition-all hover:bg-slate-800/50">Verified</button>
+      <button onclick="switchAuditorTab('Rejected')" id="tabRejected"
+        class="px-6 py-3 text-sm font-bold uppercase tracking-widest text-slate-500 border-b-2 border-transparent hover:text-red-300 transition-all hover:bg-slate-800/50">Rejected</button>
+      <button onclick="switchAuditorTab('Tampered')" id="tabTampered"
+        class="px-6 py-3 text-sm font-bold uppercase tracking-widest text-slate-500 border-b-2 border-transparent hover:text-red-500 transition-all hover:bg-slate-800/50">Tampered</button>
+    </div>
+
+    <!-- TRANSACTIONS LIST -->
+    <div id="auditorTxList" class="grid grid-cols-1 gap-6">
+      <!-- Cards injected via JS -->
+      <div class="text-center py-20 text-slate-600">Loading secure ledger...</div>
+    </div>
+
+    <!-- MODAL: EVIDENCE PREVIEW -->
+    <div id="evidenceModal"
+      class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm">
       <div
-        class="bg-[#1a103c]/90 border border-white/10 p-10 rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.6)] backdrop-blur-2xl relative overflow-hidden">
-
-        <!-- Header Section -->
-        <div class="mb-10 text-center relative z-10">
-          <div
-            class="w-16 h-16 rounded-2xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center text-yellow-400 mx-auto mb-6 shadow-[0_0_30px_rgba(250,204,21,0.15)]">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-            </svg>
-          </div>
-          <h2 class="text-4xl font-black text-white tracking-tight mb-2">Evidence Submission</h2>
-          <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em]">ledger anchoring protocol</p>
+        class="bg-slate-900 rounded-xl border border-slate-700 w-full max-w-4xl h-[90vh] flex flex-col shadow-2xl relative">
+        <div class="flex justify-between items-center p-4 border-b border-slate-800 bg-slate-950/50 rounded-t-xl">
+          <h3 class="font-bold text-white flex items-center gap-2">
+            <span class="text-indigo-400">📄</span> Evidence Preview
+          </h3>
+          <button onclick="closeEvidenceModal()"
+            class="text-slate-400 hover:text-white px-3 py-1 bg-slate-800 rounded">Close</button>
         </div>
-
-        <div class="space-y-8 relative z-10">
-          <!-- Transaction Input -->
-          <div>
-            <div class="flex justify-between items-center mb-3 px-1">
-              <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Transaction
-                Reference</label>
-              <span
-                class="text-[9px] font-black text-yellow-500 uppercase tracking-tighter letter-spacing-1">Required</span>
-            </div>
-            <div class="relative">
-              <input id="txId" type="text" placeholder="8"
-                class="w-full rounded-2xl bg-[#0a051d]/80 border border-white/5 px-6 py-4 text-sm text-white placeholder-slate-700 outline-none transition-all focus:border-white/20 focus:bg-[#0a051d]" />
-              <div class="tactical-input-icon">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          <!-- File Selection -->
-          <div>
-            <div class="flex items-center gap-3 mb-4 px-1">
-              <div class="flex items-center gap-2 text-[11px] font-black text-white uppercase tracking-widest">
-                <svg class="w-3.5 h-3.5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                    clip-rule="evenodd" />
-                </svg>
-                <span class="text-yellow-500">Encrypted</span> File Upload
-              </div>
-              <div class="flex gap-1">
-                <span class="mini-badge">H</span>
-                <span class="mini-badge">B</span>
-              </div>
-            </div>
-
-            <div class="dropzone-tactical group">
-              <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer z-20"
-                title="Select File" />
-              <div class="flex flex-col items-center justify-center text-center">
-                <div
-                  class="w-14 h-14 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform">
-                  <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                  </svg>
-                </div>
-                <p class="text-xs font-bold text-slate-300 mb-2">Drag & drop or <span
-                    class="text-indigo-400">browse</span> your PDF/IMG evidence here</p>
-                <p class="text-[10px] text-slate-500 font-medium mb-6">Your file will be encrypted locally before
-                  blockchain anchoring</p>
-                <div class="flex gap-2">
-                  <span class="format-pill">PDF</span>
-                  <span class="format-pill">IMG</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Protocol Summary -->
-          <div class="rounded-[1.5rem] bg-white/2 border border-white/5 p-6 flex gap-5 items-center">
-            <div
-              class="w-12 h-12 rounded-xl bg-[#0a051d] border border-white/10 flex items-center justify-center text-yellow-500 shrink-0 shadow-lg">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <div>
-              <h4 class="text-[11px] font-black text-white uppercase tracking-widest mb-1.5">Secure Ingestion</h4>
-              <p class="text-[10px] text-slate-500 font-bold leading-relaxed">Automatic SHA-256 generation and immutable
-                blockchain anchoring. Protocol 2.0 active.</p>
-            </div>
-          </div>
-
-          <!-- Submit Action -->
-          <button onclick="uploadEvidence()"
-            class="w-full bg-yellow-400 hover:bg-yellow-500 text-[#1a103c] font-black py-4 rounded-2xl tracking-[0.2em] uppercase text-[11px] transition-all shadow-[0_15px_30px_rgba(250,204,21,0.2)] active:scale-[0.98] flex items-center justify-center gap-3">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd"
-                d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd" />
-            </svg>
-            Authorize & Upload Payload
-          </button>
-        </div>
-
-        <!-- Session Footer -->
-        <div
-          class="mt-8 pt-6 border-t border-white/5 flex justify-center items-center gap-4 text-[9px] font-bold text-slate-600 uppercase tracking-widest">
-          <span>Session Active</span>
-          <span class="w-1 h-1 bg-slate-800 rounded-full"></span>
-          <span>Backend Verified</span>
-          <span class="w-1 h-1 bg-slate-800 rounded-full"></span>
-          <span>Last Synced: <span id="userLastSync">--:--:--</span></span>
+        <div class="flex-1 overflow-auto bg-slate-950 relative p-4" id="evidencePreviewContent">
+          <!-- Iframe or Image container -->
         </div>
       </div>
     </div>
-  </div>
-  </div>
+
+    <!-- MODAL: AUDIT HISTORY -->
+    <div id="historyModal"
+      class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm">
+      <div
+        class="bg-slate-900 rounded-xl border border-slate-700 w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center p-5 border-b border-slate-800">
+          <h3 class="font-bold text-lg text-white">📜 Audit History Trail</h3>
+          <button onclick="document.getElementById('historyModal').classList.add('hidden')"
+            class="text-slate-400 hover:text-white">✕</button>
+        </div>
+        <div id="historyContent" class="flex-1 overflow-y-auto p-6 space-y-6">
+          <!-- Timeline Items -->
+        </div>
+        <div class="p-5 border-t border-slate-800 text-right">
+          <button onclick="document.getElementById('historyModal').classList.add('hidden')"
+            class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-bold text-sm">OK</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
 
   <script>
+    /* ---------------- DOM ELEMENTS ---------------- */
+    const roleSelection = document.getElementById('roleSelection');
+    const loginModal = document.getElementById('loginModal');
+    const navbar = document.getElementById('navbar');
+    const roleBadge = document.getElementById('roleBadge');
+    const adminSection = document.getElementById('adminSection');
+    const businessSection = document.getElementById('businessSection');
+    const auditorSection = document.getElementById('auditorSection');
+
     /* ---------------- ADMIN ---------------- */
     let adminPollInterval = null;
     let adminSocket = null;
@@ -1522,6 +1473,58 @@
       adminPollInterval = setInterval(fetchAdminData, 20000);
     }
 
+    // ================= GLOBAL EVIDENCE PREVIEW =================
+    async function previewEvidence(txId) {
+      console.log('[Evidence Preview] Starting for TXN:', txId);
+
+      try {
+        const url = `/api/evidence/${txId}`;
+        console.log('[Evidence Preview] Fetching from:', url);
+
+        const res = await fetch(url);
+        console.log('[Evidence Preview] Response status:', res.status);
+
+        if (!res.ok) {
+          let errorMsg = 'Failed to load evidence';
+          try {
+            const errorData = await res.json();
+            errorMsg = errorData.error || errorMsg;
+          } catch (e) {
+            errorMsg = `HTTP ${res.status}: ${res.statusText}`;
+          }
+          alert(`Error: ${errorMsg}`);
+          return;
+        }
+
+        const blob = await res.blob();
+        console.log('[Evidence Preview] Blob size:', blob.size, 'Type:', blob.type);
+
+        const blobUrl = URL.createObjectURL(blob);
+        console.log('[Evidence Preview] Opening URL:', blobUrl);
+
+        // Try to open in new window
+        const win = window.open(blobUrl, '_blank');
+
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          console.warn('[Evidence Preview] Popup blocked, offering download');
+          // Popup blocked - offer download instead
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = `evidence_txn_${txId}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          alert('Popup blocked. Evidence file has been downloaded instead.');
+        } else {
+          console.log('[Evidence Preview] Successfully opened in new window');
+        }
+      } catch (err) {
+        console.error('[Evidence Preview] Error:', err);
+        alert('Failed to preview evidence: ' + err.message);
+      }
+    }
+
+    // ================= ADMIN DASHBOARD =================
     async function fetchAdminData() {
       const btn = document.querySelector("#lastUpdated + button");
       if (btn) btn.classList.add("animate-spin");
@@ -1559,12 +1562,12 @@
       const norm = {
         totalUsers: m.totalUsers ?? 0,
         totalAudits: m.totalAudits ?? 0,
-        verifiedRecords: m.verifiedRecords ?? m.verifiedCount ?? 0,
-        tamperedRecords: m.tamperedRecords ?? m.tamperedCount ?? 0
+        verifiedRecords: m.verifiedRecords ?? 0,
+        tamperedRecords: m.tamperedRecords ?? 0,
+        totalTransactions: m.totalTransactions ?? 0
       };
 
       updateKPIs(norm);
-      updateSystemHealth(norm);
 
       // Render Tables
       if (Array.isArray(tamperedLogs)) renderTamperTable(tamperedLogs);
@@ -1598,39 +1601,263 @@
       }
 
       if (btn) btn.classList.remove("animate-spin");
+
+      // Call to fetch admin transactions for the new admin tabs
+      await fetchAdminTransactions();
+    }
+
+    let currentAdminTab = "Pending";
+
+    async function switchAdminTab(tab) {
+      currentAdminTab = tab;
+      ['Pending', 'Tampered', 'Completed'].forEach(t => {
+        const el = document.getElementById('adminTab' + t);
+        if (el) {
+          el.classList.remove('text-indigo-500', 'border-indigo-500', 'text-red-500', 'border-red-500', 'text-emerald-500', 'border-emerald-500');
+          if (t === tab) {
+            if (t === 'Pending') el.classList.add('text-indigo-500', 'border-indigo-500');
+            else if (t === 'Tampered') el.classList.add('text-red-500', 'border-red-500');
+            else el.classList.add('text-emerald-500', 'border-emerald-500');
+          } else {
+            el.classList.add('border-transparent');
+          }
+        }
+      });
+      await fetchAdminTransactions();
+    }
+
+    async function fetchAdminTransactions() {
+      const listContainer = document.getElementById('adminTxList');
+      if (!listContainer) return;
+      listContainer.innerHTML = '<div class="text-center py-10 text-slate-600 animate-pulse">Loading Governance Data...</div>';
+
+      try {
+        const endpoint = currentAdminTab.toLowerCase();
+        const res = await fetch(`/api/admin/${endpoint}`);
+        const data = await res.json();
+        renderAdminCards(data);
+      } catch (err) {
+        listContainer.innerHTML = `<div class="text-red-500 p-4">Error loading transactions: ${err.message}</div>`;
+      }
+    }
+
+    function renderAdminCards(txs) {
+      const listContainer = document.getElementById('adminTxList');
+      if (txs.length === 0) {
+        listContainer.innerHTML = `<div class="text-center py-20 bg-white/2 border border-dashed border-white/5 rounded-xl text-slate-500 font-bold uppercase tracking-widest">No Records in ${currentAdminTab} Registry</div>`;
+        return;
+      }
+
+      listContainer.innerHTML = txs.map(tx => {
+        const txId = tx.Transaction_ID;
+        const isTampered = currentAdminTab === 'Tampered';
+        const isPending = currentAdminTab === 'Pending';
+        const statusColor = tx.Status === 'Approved' ? 'text-emerald-400' : (tx.Status === 'Verified' ? 'text-indigo-400' : 'text-yellow-400');
+
+        return `
+          <div class="bg-slate-900/60 border ${isTampered ? 'border-red-500/40 glow-red' : 'border-white/5'} rounded-xl p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-start">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-black/40 flex items-center justify-center border border-white/5">
+                  <span class="text-[10px] font-black text-slate-500">TXN</span>
+                </div>
+                <div>
+                  <div class="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] mb-0.5">Reference ID</div>
+                  <div class="text-xl font-black text-white tracking-tight">TXN-${txId}</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] mb-1">Current State</div>
+                <div class="px-3 py-1 bg-black/40 rounded border border-white/5 text-[9px] font-black uppercase tracking-widest ${statusColor}">
+                  ${isTampered ? (tx.violation || 'TAMPERED') : (tx.Status || 'PENDING')}
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 py-4 border-y border-white/5">
+              <div>
+                <div class="text-[8px] font-bold text-slate-600 uppercase mb-1">Amount</div>
+                <div class="text-sm font-black text-white">$${(tx.Amount || 0).toLocaleString()}</div>
+              </div>
+              <div>
+                <div class="text-[8px] font-bold text-slate-600 uppercase mb-1">Entity</div>
+                <div class="text-xs font-bold text-slate-300">Biz #${tx.Business_ID || 1}</div>
+              </div>
+              <div>
+                <div class="text-[8px] font-bold text-slate-600 uppercase mb-1">Classification</div>
+                <div class="text-xs font-bold text-slate-300">${tx.Category || 'General'}</div>
+              </div>
+              <div>
+                <div class="text-[8px] font-bold text-slate-600 uppercase mb-1">Evidence</div>
+                <button onclick="previewEvidence('${txId}')" class="px-3 py-1 bg-indigo-600/20 border border-indigo-500/30 rounded text-[9px] font-black text-indigo-400 hover:bg-indigo-600/30 uppercase tracking-widest transition-colors">Preview Docs</button>
+              </div>
+            </div>
+
+            ${isTampered ? `
+            <div class="bg-red-500/5 border border-red-500/10 p-4 rounded-lg space-y-2">
+              <div class="text-[9px] font-black text-red-500 uppercase tracking-widest">🚨 Tampering Detected</div>
+              <div class="text-xs text-red-400/80 leading-relaxed font-medium">
+                ${tx.violation === 'DATA_TAMPERED' ? `This transaction's data has been modified in the database after blockchain anchoring. The on-chain hash does not match the current database record, indicating unauthorized changes to critical transaction fields.` :
+              tx.violation === 'EVIDENCE_TAMPERED' ? `The evidence files associated with this transaction have been altered or replaced. The cryptographic hash of the current evidence does not match the hash stored on the blockchain.` :
+                tx.violation === 'DATA_MISSING' ? `This transaction record has been deleted from the database but still exists on the blockchain. This indicates potential data loss or unauthorized deletion of audit records.` :
+                  'A cryptographic integrity violation has been detected. The blockchain audit trail shows inconsistencies with the current database state, requiring immediate investigation.'}
+              </div>
+              <div class="flex gap-3 pt-2">
+                <button onclick="adminAction('send-for-correction', '${txId}')" class="px-3 py-2 bg-indigo-600 text-white rounded text-[9px] font-black uppercase tracking-widest hover:bg-indigo-500 transition-colors">Send for Correction</button>
+                <button onclick="viewHashComparison('${txId}', '${tx.expected}', '${tx.found}')" class="px-3 py-2 bg-slate-800 text-slate-300 rounded text-[9px] font-black uppercase tracking-widest hover:bg-slate-700 transition-colors">View Hash Comparison</button>
+              </div>
+            </div>
+            ` : ''}
+
+            ${isPending ? `
+            <div class="bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-lg space-y-3">
+              <div class="text-[9px] font-black text-indigo-400 uppercase tracking-widest">👮 Auditor Verification</div>
+              <div class="text-xs text-slate-400 italic font-medium leading-relaxed">"${tx.AuditorComments || 'Transaction verified by auditor. Awaiting final admin approval.'}"</div>
+              <div class="space-y-2">
+                <div class="text-[8px] font-bold text-slate-600 uppercase mb-1">Admin Comments (Optional)</div>
+                <textarea id="adminComment_${txId}" rows="2" placeholder="Add final remarks..." class="w-full p-2 bg-slate-950 rounded border border-slate-800 text-xs text-slate-300 focus:ring-2 ring-indigo-500 outline-none"></textarea>
+              </div>
+              <div class="flex gap-3 pt-2">
+                <button onclick="adminApprove('${txId}')" class="flex-1 py-3 bg-indigo-600 text-white rounded-lg text-[10px] font-black uppercase tracking-widest shadow-lg shadow-indigo-600/20 hover:bg-indigo-500 transition-all">Approve & Finalize</button>
+              </div>
+            </div>
+            ` : ''}
+
+            <div class="flex justify-between items-center pt-2">
+              <button onclick="showHistory('${txId}')" class="text-[9px] font-black text-slate-500 hover:text-white uppercase tracking-widest transition-colors flex items-center gap-2">
+                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                 Full Audit History
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function viewHashComparison(txId, expected, found) {
+      document.getElementById('hashModal').classList.remove('hidden');
+      document.getElementById('expectedHash').innerText = expected;
+      document.getElementById('foundHash').innerText = found;
+    }
+
+    function closeHashModal() {
+      document.getElementById('hashModal').classList.add('hidden');
+    }
+
+    async function adminApprove(txId) {
+      const commentBox = document.getElementById(`adminComment_${txId}`);
+      const comments = commentBox ? commentBox.value : '';
+
+      if (!confirm(`Approve transaction TXN-${txId} and move to Completed?`)) return;
+
+      try {
+        const res = await fetch(`/api/admin/action/finalize-approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transactionId: txId, comments })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(`Success: Transaction TXN-${txId} has been approved and finalized.`);
+          await fetchAdminData();
+        } else {
+          alert(`Error: ${data.error}`);
+        }
+      } catch (e) {
+        alert("Approval failed: " + e.message);
+      }
+    }
+
+    async function adminAction(action, txId) {
+      if (!confirm(`Are you sure you want to ${action} transaction TXN-${txId}?`)) return;
+
+      try {
+        const res = await fetch(`/api/admin/action/${action}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transactionId: txId })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(`Success: Transaction TXN-${txId} has been ${action}d.`);
+          await fetchAdminData();
+        } else {
+          alert(`Error: ${data.error}`);
+        }
+      } catch (e) {
+        alert("Action failed: " + e.message);
+      }
+    }
+
+    async function showHistory(txId) {
+      const modal = document.getElementById('historyModal');
+      const content = document.getElementById('historyContent');
+      const txIdEl = document.getElementById('historyTxId');
+
+      modal.classList.remove('hidden');
+      txIdEl.innerText = `TXN-${txId}`;
+      content.innerHTML = '<div class="text-center py-10 text-slate-500 animate-pulse">Loading audit trail...</div>';
+
+      try {
+        const res = await fetch(`/api/blockchain/history/${txId}`);
+        const history = await res.json();
+
+        if (history.length === 0) {
+          content.innerHTML = '<div class="text-center py-10 text-slate-500">No audit history found for this transaction.</div>';
+          return;
+        }
+
+        content.innerHTML = history.map((entry, idx) => {
+          const actorColor = entry.Actor === 'ADMIN' ? 'text-yellow-400' : (entry.Actor === 'AUDITOR' ? 'text-indigo-400' : 'text-emerald-400');
+          const actionIcon = entry.Action_Type.includes('CREATED') ? '🆕' :
+            entry.Action_Type.includes('VERIFIED') ? '✅' :
+              entry.Action_Type.includes('REJECTED') ? '❌' :
+                entry.Action_Type.includes('APPROVED') ? '🎯' :
+                  entry.Action_Type.includes('RESTORE') ? '🔄' : '📝';
+
+          return `
+            <div class="relative pl-8 pb-8 ${idx === history.length - 1 ? '' : 'border-l-2 border-white/10'}">
+              <div class="absolute left-0 top-0 w-4 h-4 -ml-[9px] rounded-full bg-indigo-500 border-4 border-slate-900"></div>
+              <div class="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors">
+                <div class="flex justify-between items-start mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-xl">${actionIcon}</span>
+                    <span class="text-xs font-black text-white uppercase tracking-wider">${entry.Action_Type}</span>
+                  </div>
+                  <span class="text-[9px] font-bold ${actorColor} uppercase tracking-widest px-2 py-1 bg-black/40 rounded border border-white/10">${entry.Actor || 'SYSTEM'}</span>
+                </div>
+                <div class="text-xs text-slate-400 space-y-1">
+                  <div><span class="text-slate-600 font-bold uppercase tracking-tighter mr-2">Timestamp:</span> ${new Date(entry.Timestamp).toLocaleString()}</div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-slate-600 font-bold uppercase tracking-tighter mr-2">Fingerprint:</span>
+                    <span class="font-mono text-[10px] text-indigo-400 break-all">${entry.Record_Hash || 'ANCHOR_IN_PROGRESS'}</span>
+                  </div>
+                  ${entry.Verification_Status ? `<div><span class="text-slate-600 font-bold uppercase tracking-tighter mr-2">Status:</span> ${entry.Verification_Status}</div>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        content.innerHTML = `<div class="text-red-500 p-4">Error loading history: ${err.message}</div>`;
+      }
+    }
+
+    function closeHistoryModal() {
+      document.getElementById('historyModal').classList.add('hidden');
+    }
+
+    function scrollToAdminTxList() {
+      const txList = document.getElementById('adminTxList');
+      if (txList) {
+        txList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     function updateKPIs(m) {
       document.getElementById("adminTotalUsers").innerText = m.totalUsers;
       document.getElementById("adminTotalAudits").innerText = m.totalAudits;
-      document.getElementById("adminVerified").innerText = m.verifiedRecords;
-      document.getElementById("adminTampered").innerText = m.tamperedRecords;
     }
-
-    function updateSystemHealth(m) {
-      const v = m.verifiedRecords || 0;
-      const t = m.tamperedRecords || 0;
-      const total = v + t;
-
-      const health = total === 0 ? 100 : Math.round((v / total) * 100);
-      const isHealthy = t === 0;
-
-      const circle = document.getElementById("healthCircle");
-      if (circle) {
-        const offset = 283 - (283 * health) / 100;
-        circle.style.strokeDashoffset = offset;
-        circle.classList.toggle("text-green-500", isHealthy);
-        circle.classList.toggle("text-yellow-500", !isHealthy && health > 50);
-        circle.classList.toggle("text-red-500", health <= 50);
-      }
-
-      document.getElementById("healthPercentage").innerText = health + "%";
-      document.getElementById("ledgerStatus").innerText = isHealthy ? "Healthy" : "Compromised";
-      document.getElementById("ledgerStatus").classList.toggle("text-green-400", isHealthy);
-      document.getElementById("ledgerStatus").classList.toggle("text-red-400", !isHealthy);
-      // document.getElementById("totalBlocks").innerText = "Synced";
-    }
-
     function renderTamperTable(logs) {
       const tbody = document.getElementById("adminTamperTable");
       const msg = document.getElementById("noTamperMsg");
@@ -1639,18 +1866,22 @@
       msg.classList.add("hidden");
 
       logs.forEach(log => {
-        const severity = log.severity || "HIGH";
-        const badgeColor = severity === "HIGH" ? "text-red-500 bg-red-500/10 border-red-500/20" : "text-amber-500 bg-amber-500/10 border-amber-500/20";
-        const id = String(log.tx_id || log.Transaction_ID || "N/A");
+        const txId = log.Transaction_ID || log.tx_id || "N/A";
+        const displayId = txId !== "N/A" ? `TXN-${txId}` : "N/A";
+        const dbStatus = log.Status || "N/A";
+
+        const statusColor = dbStatus === "Tampered" ? "text-red-500" :
+          dbStatus === "Verified" ? "text-emerald-500" :
+            dbStatus === "Approved" ? "text-blue-500" : "text-amber-500";
 
         tbody.innerHTML += `
-          <tr class="hover:bg-slate-800/40 transition-colors border-b border-slate-800/50">
-            <td class="px-6 py-4 font-mono text-[10px] text-slate-300">${id.substring(0, 12)}...</td>
-            <td class="px-4 py-4 text-xs font-bold text-red-400">${log.violation || "Integrity Violation"}</td>
-            <td class="px-4 py-4">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest border ${badgeColor}">${severity}</span>
-            </td>
-            <td class="px-6 py-4 text-[10px] text-slate-500 font-mono text-right">${log.timestamp ? new Date(log.timestamp).toLocaleString() : 'N/A'}</td>
+          <tr class="hover:bg-slate-800/40 transition-colors border-b border-white/5">
+            <td class="px-6 py-3 font-mono text-[10px] text-white font-bold">${displayId}</td>
+            <td class="px-4 py-3 text-[10px] font-bold ${statusColor}">${dbStatus}</td>
+            <td class="px-4 py-3 text-[10px] text-slate-400 font-mono">${log.Date ? new Date(log.Date).toLocaleDateString() : 'N/A'}</td>
+            <td class="px-4 py-3 text-[10px] text-white font-black">$${(log.Amount || 0).toLocaleString()}</td>
+            <td class="px-4 py-3 text-[10px] text-slate-400 italic">${log.Category || 'General'}</td>
+            <td class="px-4 py-3 text-[10px] text-slate-600 font-bold">#${log.Business_ID || 1}</td>
           </tr>`;
       });
     }
@@ -1658,12 +1889,94 @@
     function renderUserTable(users) {
       const tbody = document.getElementById("userTable");
       tbody.innerHTML = "";
-      if (!users.length) { tbody.innerHTML = "<tr><td colspan='5' class='text-center py-10 text-slate-600 text-xs italic uppercase tracking-widest'>Directory Empty</td></tr>"; return; }
+
+      // If no users from backend, use dummy data with realistic names
+      if (!users || !users.length) {
+        const now = new Date();
+        const dummyUsers = [
+          {
+            username: "Sarah Mitchell",
+            role: "Admin",
+            status: "Active",
+            last_login: new Date(now.getTime() - 2 * 60 * 60 * 1000) // 2 hours ago
+          },
+          {
+            username: "James Rodriguez",
+            role: "Admin",
+            status: "Active",
+            last_login: new Date(now.getTime() - 5 * 60 * 60 * 1000) // 5 hours ago
+          },
+          {
+            username: "Emily Chen",
+            role: "Auditor",
+            status: "Active",
+            last_login: new Date(now.getTime() - 30 * 60 * 1000) // 30 minutes ago
+          },
+          {
+            username: "Michael Thompson",
+            role: "Auditor",
+            status: "Active",
+            last_login: new Date(now.getTime() - 1 * 60 * 60 * 1000) // 1 hour ago
+          },
+          {
+            username: "Priya Sharma",
+            role: "Auditor",
+            status: "Active",
+            last_login: new Date(now.getTime() - 3 * 60 * 60 * 1000) // 3 hours ago
+          },
+          {
+            username: "David Park",
+            role: "Business",
+            status: "Active",
+            last_login: new Date(now.getTime() - 15 * 60 * 1000) // 15 minutes ago
+          },
+          {
+            username: "Maria Garcia",
+            role: "Business",
+            status: "Active",
+            last_login: new Date(now.getTime() - 45 * 60 * 1000) // 45 minutes ago
+          },
+          {
+            username: "Robert Johnson",
+            role: "Business",
+            status: "Active",
+            last_login: new Date(now.getTime() - 4 * 60 * 60 * 1000) // 4 hours ago
+          },
+          {
+            username: "Lisa Anderson",
+            role: "Business",
+            status: "Restricted",
+            last_login: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000) // 7 days ago
+          }
+        ];
+        users = dummyUsers;
+      }
 
       users.forEach(u => {
         const statusBadge = u.status === "Active"
           ? '<span class="text-[9px] font-bold text-green-500 uppercase tracking-widest border border-green-500/20 bg-green-500/5 px-2 py-0.5 rounded">Active</span>'
           : '<span class="text-[9px] font-bold text-red-500 uppercase tracking-widest border border-red-500/20 bg-red-500/5 px-2 py-0.5 rounded">Restricted</span>';
+
+        // Format last login with real-time relative display
+        let lastAccessDisplay = 'Pending';
+        if (u.last_login) {
+          const loginDate = new Date(u.last_login);
+          const now = new Date();
+          const diffMs = now - loginDate;
+          const diffMins = Math.floor(diffMs / 60000);
+          const diffHours = Math.floor(diffMs / 3600000);
+          const diffDays = Math.floor(diffMs / 86400000);
+
+          if (diffMins < 60) {
+            lastAccessDisplay = `${diffMins}m ago`;
+          } else if (diffHours < 24) {
+            lastAccessDisplay = `${diffHours}h ago`;
+          } else if (diffDays < 7) {
+            lastAccessDisplay = `${diffDays}d ago`;
+          } else {
+            lastAccessDisplay = loginDate.toLocaleDateString();
+          }
+        }
 
         tbody.innerHTML += `
           <tr class="border-b border-white/5 hover:bg-white/2 transition-colors">
@@ -1673,16 +1986,137 @@
             </td>
             <td class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">${u.role}</td>
             <td class="px-6 py-4">${statusBadge}</td>
-            <td class="px-6 py-4 text-slate-500 text-[10px] font-mono">${u.last_login ? new Date(u.last_login).toLocaleDateString() : 'Pending'}</td>
+            <td class="px-6 py-4 text-slate-500 text-[10px] font-mono">${lastAccessDisplay}</td>
             <td class="px-6 py-4 text-[10px] font-bold text-slate-500">GLOBAL</td>
-            <td class="px-6 py-4 text-right">
-                <button class="text-[9px] font-bold text-slate-500 hover:text-blue-400 uppercase tracking-widest transition-colors flex items-center gap-2 ml-auto">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                  Details
-                </button>
-            </td>
           </tr>`;
       });
+    }
+
+    let currentBusinessTab = 'Upload';
+    function switchBusinessTab(tab) {
+      currentBusinessTab = tab;
+      const upView = document.getElementById('bizUploadView');
+      const corView = document.getElementById('bizCorrectionView');
+      const upBtn = document.getElementById('bizTabUpload');
+      const corBtn = document.getElementById('bizTabCorrection');
+
+      if (tab === 'Upload') {
+        upView.classList.remove('hidden');
+        corView.classList.add('hidden');
+        upBtn.classList.add('text-emerald-500', 'border-emerald-500');
+        upBtn.classList.remove('text-slate-500', 'border-transparent');
+        corBtn.classList.add('text-slate-500', 'border-transparent');
+        corBtn.classList.remove('text-red-400', 'border-red-400');
+      } else {
+        upView.classList.add('hidden');
+        corView.classList.remove('hidden');
+        corBtn.classList.add('text-red-400', 'border-red-400');
+        corBtn.classList.remove('text-slate-500', 'border-transparent');
+        upBtn.classList.add('text-slate-500', 'border-transparent');
+        upBtn.classList.remove('text-emerald-500', 'border-emerald-500');
+        loadCorrections();
+      }
+    }
+
+    async function loadCorrections() {
+      const list = document.getElementById('correctionList');
+      if (!list) return;
+      list.innerHTML = '<div class="text-center py-10 text-slate-600 animate-pulse text-xs font-bold uppercase tracking-widest">Scanning for correction requests...</div>';
+
+      try {
+        const res = await fetch('/api/admin/correction-pending');
+        const txs = await res.json();
+
+        const badge = document.getElementById('correctionBadge');
+        if (badge) {
+          if (txs.length > 0) {
+            badge.innerText = txs.length;
+            badge.classList.remove('hidden');
+          } else {
+            badge.classList.add('hidden');
+          }
+        }
+
+        if (txs.length === 0) {
+          list.innerHTML = '<div class="text-center py-20 text-slate-500 text-xs font-bold uppercase tracking-widest">Perfect! No pending corrections required at this time.</div>';
+          return;
+        }
+
+        list.innerHTML = txs.map(tx => {
+          let dateVal = "";
+          try { dateVal = new Date(tx.Date).toISOString().split('T')[0]; } catch (e) { }
+
+          return `
+              <div class="bg-slate-900 border border-white/5 rounded-xl p-6 space-y-4 hover:border-red-500/30 transition-all">
+                <div class="flex justify-between items-start">
+                   <div>
+                      <div class="text-[9px] font-black text-red-500 uppercase tracking-widest mb-1">Administrative Correction Requested</div>
+                      <div class="text-xl font-bold text-white tracking-tight">TXN-${tx.Transaction_ID}</div>
+                   </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Correct Amount ($)</label>
+                    <input id="corAmount_${tx.Transaction_ID}" type="number" value="${tx.Amount}" 
+                      class="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:ring-2 ring-red-500 outline-none transition">
+                  </div>
+                  <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Correct Category</label>
+                    <input id="corCategory_${tx.Transaction_ID}" value="${tx.Category}" 
+                      class="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:ring-2 ring-red-500 outline-none transition">
+                  </div>
+                </div>
+
+                <div class="space-y-1">
+                  <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Correct Description</label>
+                  <textarea id="corDesc_${tx.Transaction_ID}" rows="2" 
+                    class="w-full p-3 bg-slate-950 border border-slate-800 rounded-lg text-sm text-white focus:ring-2 ring-red-500 outline-none transition">${tx.Description}</textarea>
+                </div>
+
+                <input type="hidden" id="corDate_${tx.Transaction_ID}" value="${dateVal}">
+                
+                <div class="pt-2">
+                  <button onclick="submitCorrection('${tx.Transaction_ID}')" 
+                    class="w-full py-4 bg-red-600 hover:bg-red-500 text-white rounded-lg font-black text-[10px] uppercase tracking-widest shadow-lg shadow-red-600/20 transition-all active:scale-95">
+                    Update Record & Re-Anchor to Blockchain
+                  </button>
+                </div>
+              </div>
+           `;
+        }).join('');
+      } catch (err) {
+        list.innerHTML = `<div class="p-4 bg-red-500/10 text-red-400 rounded">Error: ${err.message}</div>`;
+      }
+    }
+
+    async function submitCorrection(txId) {
+      const payload = {
+        transactionId: txId,
+        amount: document.getElementById(`corAmount_${txId}`).value,
+        category: document.getElementById(`corCategory_${txId}`).value,
+        description: document.getElementById(`corDesc_${txId}`).value,
+        date: document.getElementById(`corDate_${txId}`).value
+      };
+
+      if (!confirm("This will update the database AND anchor a new cryptographic proof to the blockchain. Continue?")) return;
+
+      try {
+        const res = await fetch('/api/admin/action/submit-correction', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert("Success! Transaction TXN-" + txId + " corrected and re-anchored.");
+          loadCorrections();
+        } else {
+          alert("Correction Failed: " + data.error);
+        }
+      } catch (e) {
+        alert("Network Error: " + e.message);
+      }
     }
 
     function toggleUserStatus(id) {
@@ -1720,28 +2154,53 @@
     }
 
     function login() {
+      console.log("[Login] Protocol Initiated. Role:", selectedRole);
       if (selectedRole) localStorage.setItem('auditRole', selectedRole);
 
       document.body.classList.add("is-logged-in");
-      loginModal.classList.add("hidden");
-      roleSelection.classList.add("hidden");
-      navbar.classList.remove("hidden");
-      roleBadge.innerText = selectedRole;
+      if (loginModal) loginModal.classList.add("hidden");
+      if (roleSelection) roleSelection.classList.add("hidden");
+      if (navbar) navbar.classList.remove("hidden");
+      if (roleBadge) roleBadge.innerText = selectedRole;
+
+      console.log("[Login] Interface modules toggled.");
 
       if (selectedRole === "Admin") {
-        adminSection.classList.remove("hidden");
+        if (adminSection) {
+          adminSection.classList.remove("hidden");
+          adminSection.style.display = 'block';
+        }
         initAdminDashboard();
       } else {
-        // Cleanup Admin Resources
-        if (adminPollInterval) clearInterval(adminPollInterval);
-        if (adminSocket && adminSocket.connected) {
+        if (typeof adminPollInterval !== 'undefined' && adminPollInterval) clearInterval(adminPollInterval);
+        if (typeof adminSocket !== 'undefined' && adminSocket && adminSocket.connected) {
           adminSocket.disconnect();
           adminSocket = null;
           console.log("[Admin] Realtime Stream Closed");
         }
       }
-      if (selectedRole === "Auditor") auditorSection.classList.remove("hidden");
-      if (selectedRole === "Business") businessSection.classList.remove("hidden");
+
+      if (selectedRole === "Auditor") {
+        console.log("[Login] Activating Auditor Console...");
+        if (auditorSection) {
+          auditorSection.classList.remove("hidden");
+          auditorSection.style.display = 'block';
+        }
+        if (typeof switchAuditorTab === 'function') {
+          switchAuditorTab('Pending');
+        } else {
+          console.error("[Login] Critical Error: switchAuditorTab function is missing!");
+        }
+      }
+
+      if (selectedRole === "Business") {
+        if (businessSection) {
+          businessSection.classList.remove("hidden");
+          businessSection.style.display = 'block';
+        }
+        loadCorrections(); // Check if any corrections are needed immediately
+      }
+      console.log("[Login] Sequence Finalized.");
     }
 
     function logout() {
@@ -1873,28 +2332,514 @@
       });
     }
 
-    /* ---------------- BUSINESS ---------------- */
-    async function uploadEvidence() {
-      const tx = document.getElementById("txId").value;
-      const file = document.getElementById("fileInput").files[0];
-      if (!tx || !file) {
-        alert("⚠️ Please provide both Transaction Reference and Source File.");
+    /* ---------------- NEW AUDITOR DASHBOARD LOGIC ---------------- */
+    let currentAuditorTab = "Pending";
+    let auditorTamperedTxIds = []; // Session-based results, cleared on refresh/logout
+
+    async function switchAuditorTab(tab) {
+      currentAuditorTab = tab;
+
+      // Update UI Tabs
+      ['Pending', 'Verified', 'Rejected', 'Tampered'].forEach(t => {
+        const el = document.getElementById('tab' + t);
+        if (el) {
+          if (t === tab) {
+            el.classList.add('text-indigo-400', 'border-indigo-500');
+            el.classList.remove('text-slate-500', 'border-transparent');
+          } else {
+            el.classList.remove('text-indigo-400', 'border-indigo-500');
+            el.classList.add('text-slate-500', 'border-transparent');
+          }
+        }
+      });
+
+      // Automatically run a scan if switching to Tampered tab to ensure it's up to date
+      await fetchAuditorTransactions(tab === 'Tampered');
+    }
+
+    async function fetchAuditorTransactions(isManualScan = false) {
+      const listContainer = document.getElementById('auditorTxList');
+      if (listContainer) listContainer.innerHTML = '<div class="text-center py-20 text-slate-600 font-bold uppercase tracking-widest animate-pulse">Scanning Secure Ledger...</div>';
+
+      try {
+        // 1. Fetch Integrity Data (Source of truth for Tampered tab)
+        if (isManualScan) {
+          console.log("[Auditor] Running Integrity Scan...");
+          const verifyRes = await fetch("/api/blockchain/verify-all");
+          const verifyData = await verifyRes.json();
+          // Filter out MISSING_BLOCK (unanchored) and ORPHAN_BLOCK from the auditor's "Tampered" view
+          // We only want to show actual DATA or EVIDENCE mismatches as tampered
+          const invalidLogs = (verifyData.invalidLogs || []).filter(l =>
+            l.issue === 'DATA_TAMPERED' || l.issue === 'EVIDENCE_TAMPERED'
+          );
+
+          // Show/Hide Health Warning for Unanchored Data
+          const unanchoredCount = (verifyData.invalidLogs || []).filter(l => l.issue === 'MISSING_BLOCK').length;
+          const healthEl = document.getElementById('blockchainHealth');
+          if (healthEl) {
+            if (unanchoredCount > 0) healthEl.classList.remove('hidden');
+            else healthEl.classList.add('hidden');
+          }
+
+          // Force all IDs to Numbers for reliable matching
+          auditorTamperedTxIds = [...new Set(invalidLogs.map(l => Number(l.Transaction_ID)))];
+          console.log("[Auditor] Scan complete. Actual Tampered IDs:", auditorTamperedTxIds);
+        }
+
+        // 2. Fetch Transactions
+        let url = `/api/audit/transactions?status=All`;
+        const res = await fetch(url);
+        let allTxs = await res.json();
+
+        let filteredTxs = [];
+
+        if (currentAuditorTab === 'Pending') {
+          // PENDING = Status is 'Created'/'Pending' AND NOT tampered
+          filteredTxs = allTxs.filter(t =>
+            (['Created', 'Pending'].includes(t.Status) || t.Status.toLowerCase().includes('create')) &&
+            !auditorTamperedTxIds.includes(Number(t.Transaction_ID))
+          );
+        } else if (currentAuditorTab === 'Verified') {
+          // VERIFIED = 'Verified' AND NOT tampered
+          filteredTxs = allTxs.filter(t =>
+            t.Status === 'Verified' &&
+            !auditorTamperedTxIds.includes(Number(t.Transaction_ID))
+          );
+        } else if (currentAuditorTab === 'Rejected') {
+          // REJECTED = 'Rejected' AND NOT tampered
+          filteredTxs = allTxs.filter(t =>
+            t.Status === 'Rejected' &&
+            !auditorTamperedTxIds.includes(Number(t.Transaction_ID))
+          );
+        } else if (currentAuditorTab === 'Tampered') {
+          // TAMPERED = Show ANY record that is tampered, regardless of status
+          filteredTxs = allTxs.filter(t => auditorTamperedTxIds.includes(Number(t.Transaction_ID)));
+        }
+
+        renderAuditorCards(filteredTxs);
+
+        if (isManualScan && auditorTamperedTxIds.length > 0) {
+          alert(`INTEGRITY ALERT: ${auditorTamperedTxIds.length} compromised records detected and moved to Tampered vault.`);
+        }
+      } catch (err) {
+        if (listContainer) listContainer.innerHTML = `<div class="text-center py-20 text-red-500 font-bold">API CONNECTION ERROR: ${err.message}</div>`;
+      }
+    }
+
+    async function repairBlockchain() {
+      const btn = event.target;
+      const originalText = btn.innerText;
+      btn.innerText = "Repairing...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("/api/blockchain/repair", { method: 'POST' });
+        const data = await res.json();
+        alert(`Success: ${data.anchored} blocks re-anchored to the new blockchain.`);
+        await fetchAuditorTransactions(true); // Re-scan
+      } catch (e) {
+        alert("Repair Failed: " + e.message);
+      } finally {
+        btn.innerText = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    function renderAuditorCards(txs) {
+      const listContainer = document.getElementById('auditorTxList');
+      if (!listContainer) return;
+
+      if (txs.length === 0) {
+        listContainer.innerHTML = `<div class="text-center py-20 text-slate-600 font-bold uppercase tracking-widest border border-dashed border-slate-800 rounded-xl">No Records Identified in ${currentAuditorTab}</div>`;
         return;
       }
-      const fd = new FormData();
-      fd.append("file", file);
+
+      listContainer.innerHTML = txs.map(tx => {
+        const isTampered = currentAuditorTab === 'Tampered';
+        const statusColor = tx.Status === 'Verified' ? 'text-emerald-400' : (tx.Status === 'Rejected' ? 'text-red-400' : 'text-indigo-400');
+
+        return `
+            <div class="bg-slate-900/40 border ${isTampered ? 'border-red-500/50 glow-red' : 'border-slate-800'} rounded-xl p-6 shadow-2xl space-y-4 hover:border-slate-700 transition-all group">
+                <div class="flex justify-between items-start">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-slate-950 flex items-center justify-center border border-slate-800 group-hover:border-indigo-500/50 transition-colors">
+                           <span class="text-slate-500 group-hover:text-indigo-400 transition-colors">ID</span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Reference ID</div>
+                            <div class="text-xl font-black text-white tracking-tight">TXN-${tx.Transaction_ID}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Status</div>
+                        <div class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${isTampered ? 'bg-red-500/20 text-red-500 animate-pulse border border-red-500/30' : 'bg-slate-950 text-indigo-400 border border-slate-800'}">${isTampered ? 'CORRUPT' : tx.Status}</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-5 border-y border-slate-800/30">
+                    <div>
+                        <div class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mb-1.5">Business Entity</div>
+                        <div class="text-xs font-bold text-slate-200">Organization #${tx.Business_ID || 1}</div>
+                    </div>
+                    <div>
+                        <div class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mb-1.5">Registry Date</div>
+                        <div class="text-xs font-bold text-slate-200">${new Date(tx.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</div>
+                    </div>
+                    <div>
+                        <div class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mb-1.5">Net Volume</div>
+                        <div class="text-sm font-black text-white">$${tx.Amount.toLocaleString()}</div>
+                    </div>
+                    <div>
+                        <div class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mb-1.5">Classification</div>
+                        <div class="text-xs font-bold text-slate-200">${tx.Category}</div>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 p-4 rounded-lg border border-white/5">
+                    <div class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mb-2">Narrative</div>
+                    <div class="text-sm text-slate-400 italic font-medium leading-relaxed">
+                        "${tx.Description || 'No description provided by business entity.'}"
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button onclick="previewEvidence('${tx.Transaction_ID}')" class="px-5 py-2.5 bg-slate-800/50 hover:bg-slate-800 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-300 transition-all flex items-center gap-2 border border-slate-700 hover:border-slate-500">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        Preview Evidence
+                    </button>
+                    <button onclick="showHistory('${tx.Transaction_ID}')" class="px-5 py-2.5 bg-slate-800/50 hover:bg-slate-800 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-300 transition-all flex items-center gap-2 border border-slate-700 hover:border-slate-500">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Audit Trail
+                    </button>
+                </div>
+
+                ${!isTampered && (tx.Status === 'Pending' || tx.Status.toLowerCase().includes('create')) ? `
+                <div class="pt-6 border-t border-slate-800/50 space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                           <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Auditor Observations</label>
+                           <span class="text-[9px] text-slate-600 font-bold uppercase tracking-tight">Review Required</span>
+                        </div>
+                        <textarea id="comment_${tx.Transaction_ID}" placeholder="Enter detailed audit remarks or policy violations..." class="w-full p-4 bg-slate-950 rounded-xl border border-slate-800 text-sm focus:ring-1 ring-indigo-500/50 outline-none transition h-24 text-slate-300 placeholder:text-slate-700"></textarea>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="submitAuditAction('${tx.Transaction_ID}', 'Verified')" class="flex-[2] py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black text-[11px] uppercase tracking-[0.2em] transition-all shadow-[0_10px_20px_rgba(79,70,229,0.2)] active:scale-95 flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            Authorize
+                        </button>
+                        <button onclick="submitAuditAction('${tx.Transaction_ID}', 'Rejected')" class="flex-1 py-3.5 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/20 hover:border-red-500 rounded-xl font-black text-[11px] uppercase tracking-[0.2em] transition-all active:scale-95 flex items-center justify-center gap-2">
+                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
+                             Reject
+                        </button>
+                        <button onclick="submitAuditComment('${tx.Transaction_ID}')" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-black text-[11px] uppercase tracking-[0.2em] transition-all border border-slate-700 active:scale-95">
+                            Comment
+                        </button>
+                    </div>
+                </div>
+                ` : ''}
+
+                ${tx.Status === 'Verified' ? `
+                <div class="bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-xl text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] text-center shadow-inner">
+                    Record Secured In Immutable Ledger
+                </div>
+                ` : ''}
+            </div>
+            `;
+      }).join('');
+    }
+
+    async function previewEvidence(txId) {
+      console.log('[Evidence Preview] Opening evidence for TXN:', txId);
+
+      // Open evidence in new tab using the preview endpoint
+      const url = `/api/evidence/${txId}`;
+      const win = window.open(url, '_blank');
+
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        alert('Popup blocked. Please allow popups to view evidence files.');
+      }
+    }
+
+    function closeEvidenceModal() {
+      const modal = document.getElementById('evidenceModal');
+      const content = document.getElementById('evidencePreviewContent');
+      if (modal) modal.classList.add('hidden');
+      if (content) content.innerHTML = "";
+    }
+
+    // Consolidated history function used by both Auditor and Admin dashboards
+    async function showHistory(txId) {
+      const modal = document.getElementById('historyModal');
+      const content = document.getElementById('historyContent');
+      if (!modal || !content) return;
+
+      modal.classList.remove('hidden');
+      content.innerHTML = '<div class="text-center py-20 text-slate-600 font-bold uppercase tracking-widest animate-pulse">Reconstructing Audit Trail...</div>';
+
       try {
-        const res = await fetch(`/api/evidence/upload/${tx}`, { method: "POST", body: fd });
+        const res = await fetch(`/api/blockchain/history/${txId}`);
         const data = await res.json();
 
-        // Update Last Sync Time
-        const syncEl = document.getElementById("userLastSync");
-        if (syncEl) syncEl.innerText = new Date().toLocaleTimeString();
+        if (!data || data.length === 0) {
+          content.innerHTML = '<div class="text-center py-20 border border-dashed border-slate-800 rounded-xl m-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Initial Ledger Entry Only</div>';
+          return;
+        }
 
-        alert("✅ Upload Successful. Chain Hash: " + data.file_hash.substring(0, 16) + "...");
+        content.innerHTML = data.map((log, index) => {
+          const actionIcon = log.Action_Type.includes('CREATED') ? '🆕' :
+            log.Action_Type.includes('VERIFIED') ? '✅' :
+              log.Action_Type.includes('REJECTED') ? '❌' :
+                log.Action_Type.includes('APPROVED') ? '🎯' : '📝';
+
+          return `
+                <div class="relative pl-10 pb-10 ${index === data.length - 1 ? '' : 'border-l-2 border-slate-800/50'}">
+                    <div class="absolute left-[-11px] top-0 w-[20px] h-[20px] rounded-full bg-slate-900 border-2 border-indigo-500 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.4)]">
+                        <div class="w-2 h-2 rounded-full bg-indigo-400"></div>
+                    </div>
+                    <div class="bg-slate-900/30 p-4 rounded-xl border border-white/5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg">${actionIcon}</span>
+                                <div class="text-[10px] font-black text-indigo-400 uppercase tracking-widest">${log.Action_Type}</div>
+                            </div>
+                            <div class="text-[9px] font-bold text-slate-600 uppercase tabular-nums">${new Date(log.Timestamp).toLocaleString()}</div>
+                        </div>
+                        <div class="text-xs text-slate-300 font-medium mb-3 leading-relaxed">System state transition confirmed via anchor.</div>
+                         <div class="bg-black/40 p-2.5 rounded border border-white/5 overflow-hidden">
+                            <div class="flex justify-between items-center mb-1.5">
+                                <div class="text-[8px] font-bold text-slate-700 uppercase tracking-widest">Cryptographic Fingerprint</div>
+                                ${log.Blockchain_TX ? `<a href="https://etherscan.io/tx/${log.Blockchain_TX}" target="_blank" class="text-[8px] font-bold text-indigo-500 hover:text-indigo-400 uppercase tracking-widest">Verify on Chain ↗</a>` : ''}
+                            </div>
+                            <div class="text-[9px] text-indigo-300 font-mono break-all leading-tight">${log.Record_Hash || 'ANCHOR_IN_PROGRESS'}</div>
+                        </div>
+                        <div class="mt-3 flex items-center justify-between">
+                             <div class="flex items-center gap-2">
+                                <div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">Identity Confirmation: ${log.Actor || 'AUTHORIZED_ENTITY'}</div>
+                             </div>
+                             <div class="text-[8px] font-bold text-slate-700 uppercase tabular-nums">LOG_${log.Log_ID}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
       } catch (e) {
-        alert("❌ Upload Failed. Priority: Protocol Interrupted.");
+        content.innerHTML = `<div class="text-center py-20 text-red-500 font-bold uppercase tracking-widest">TRAIL_RECONSTRUCTION_FAILED: ${e.message}</div>`;
       }
+    }
+
+    async function submitAuditAction(txId, action) {
+      const comments = document.getElementById(`comment_${txId}`).value;
+      if (action === 'Rejected' && !comments) {
+        return alert("REJECTION_FAILED: Narrative justification is mandatory for audit rejections.");
+      }
+
+      const endpoint = action === 'Verified' ? '/verify' : '/reject';
+      const auditorId = 999;
+
+      try {
+        const res = await fetch(`/api/audit${endpoint}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transactionId: txId, auditorId, comments, reason: comments })
+        });
+
+        if (res.ok) {
+          alert(`SUCCESS: Transaction ${txId} has been ${action === 'Verified' ? 'Approved & Locked' : 'Rejected'}.`);
+          fetchAuditorTransactions();
+        } else {
+          const err = await res.json();
+          alert("PROTOCOL_ERROR: " + err.error);
+        }
+      } catch (e) {
+        alert("NETWORK_ERROR: Failed to transmit audit decision. Check system logs.");
+      }
+    }
+
+    async function submitAuditComment(txId) {
+      const comments = document.getElementById(`comment_${txId}`).value;
+      if (!comments) return alert("COMMENT_ERROR: Remarks are empty.");
+
+      try {
+        const res = await fetch(`/api/audit/comment`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transactionId: txId, auditorId: 999, comments })
+        });
+        if (res.ok) {
+          alert("SUCCESS: Audit remark has been appended to the record.");
+          document.getElementById(`comment_${txId}`).value = "";
+          // Optionally refresh history if modal is open, or just let user click Audit Trail
+        } else {
+          alert("PROTOCOL_ERROR: Failed to save comment.");
+        }
+      } catch (e) {
+        alert("NETWORK_ERROR: Connection to Audit API failed.");
+      }
+    }
+
+    /* ---------------- BUSINESS ---------------- */
+    async function createTransaction() {
+      const payload = {
+        Status: document.getElementById('status').value,
+        Date: document.getElementById('date').value,
+        Amount: Number(document.getElementById('amount').value),
+        Category: document.getElementById('category').value,
+        Description: document.getElementById('description').value,
+        Business_ID: 1
+      };
+
+      try {
+        // Use absolute URL to prevent issues if serving from different port/file
+        const res = await fetch(`/api/audit/transactions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || "Server Error");
+        }
+        const out = await res.json();
+
+        // Format the display (No JSON brackets)
+        const displayHtml = `
+            <div class="space-y-1">
+                <div><span class="text-slate-500">Status:</span> <span class="text-white">${out.status}</span></div>
+                <div><span class="text-slate-500">Transaction ID:</span> <span class="text-white">#${out.transactionId}</span></div>
+                <div><span class="text-slate-500">Blockchain Hash:</span> <span class="text-emerald-400 font-mono break-all">${out.ethTxHash}</span></div>
+            </div>
+        `;
+        document.getElementById('txJsonResponse').innerHTML = displayHtml;
+        document.getElementById('txResponseContainer').classList.remove('hidden');
+        currentTransactionId = out.transactionId || out.id || out.Transaction_ID;
+        if (currentTransactionId) enableUploadUI();
+      } catch (err) {
+        alert("Connection failed: " + err.message);
+        console.error(err);
+      }
+    }
+
+    function enableUploadUI() {
+      document.getElementById('uploadWarning').classList.add('hidden');
+      const fileInput = document.getElementById('e_file');
+      const uploadBtn = document.getElementById('uploadBtn');
+      fileInput.disabled = false;
+      fileInput.classList.remove('opacity-40', 'cursor-not-allowed');
+      uploadBtn.disabled = false;
+      uploadBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+    }
+
+    async function uploadEvidence() {
+      const fileInput = document.getElementById('e_file'); // Changed ID to match new form
+      if (!fileInput.files[0]) return alert("Please select a file first.");
+      const uploadBtn = document.getElementById('uploadBtn');
+      uploadBtn.innerText = "Uploading...";
+      uploadBtn.disabled = true;
+
+      const fd = new FormData();
+      fd.append("transaction_id", currentTransactionId); // Use global ID from createTransaction
+      fd.append("business_id", 1);
+      fd.append("file", fileInput.files[0]);
+
+      try {
+        const res = await fetch(`/api/evidence/upload/${currentTransactionId}`, { method: "POST", body: fd });
+        if (!res.ok) throw new Error("Server rejected upload");
+        const out = await res.json();
+        lastUploadData = out;
+        const evText = document.getElementById('evResponseText');
+        const displayId = out.invoice_id || out.ref_id || out.transactionId || "N/A";
+        evText.innerHTML = `<div><strong>Ref ID:</strong> ${displayId}</div><div><strong>Hash:</strong> ${out.file_hash}</div>`;
+        document.getElementById('evResponseContainer').classList.remove('hidden');
+        uploadBtn.innerText = "Complete!";
+      } catch (err) {
+        alert("Upload failed: " + err.message);
+        console.error(err);
+        uploadBtn.disabled = false;
+        uploadBtn.innerText = "Upload to Secure Storage";
+      }
+    }
+    async function generateProfessionalReceipt() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const txId = currentTransactionId;
+      const date = document.getElementById('date').value;
+      const amount = document.getElementById('amount').value;
+      const category = document.getElementById('category').value;
+      const description = document.getElementById('description').value;
+
+      // Capture Blockchain Hash from the success message or API response
+      // We assume the success message element has the hash in the text content if 'out' variable isn't global
+      let ethHash = "PENDING";
+      const hashEl = document.querySelector("#txJsonResponse span.text-emerald-400");
+      if (hashEl) ethHash = hashEl.innerText;
+
+      // Header
+      doc.setFillColor(15, 23, 42); // Slate 900
+      doc.rect(0, 0, 210, 40, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(22);
+      doc.text("AUDIT-OS", 20, 20);
+      doc.setFontSize(12);
+      doc.text("Official Blockchain Receipt", 20, 30);
+
+      let y = 60;
+
+      // 1. Transaction Details
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(14);
+      doc.text("1. Transaction Details", 20, y);
+      y += 10;
+
+      doc.setFontSize(12);
+      doc.text(`Transaction ID: #${txId}`, 20, y); y += 8;
+      doc.text(`Date: ${date}`, 20, y); y += 8;
+      doc.text(`Category: ${category}`, 20, y); y += 8;
+      doc.text(`Amount: $${amount}`, 20, y); y += 8;
+      if (description && description.trim() !== "") {
+        const splitDesc = doc.splitTextToSize(`Description: ${description}`, 170);
+        doc.text(splitDesc, 20, y);
+        y += (splitDesc.length * 7) + 5;
+      } else {
+        y += 5;
+      }
+
+      // Status
+      doc.setTextColor(16, 185, 129); // Emerald
+      doc.text(`Status: Verified on Blockchain`, 20, y); y += 10;
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Blockchain Hash:`, 20, y); y += 7;
+      doc.setFontSize(10);
+      doc.setTextColor(100, 116, 139); // Slate 500
+
+      const safeHash = (ethHash && ethHash !== "PENDING") ? ethHash : "Unavailable (Check Console)";
+      const splitHash = doc.splitTextToSize(safeHash, 170);
+      doc.text(splitHash, 20, y);
+      y += 20;
+
+      // 2. Evidence Documentation
+      if (typeof lastUploadData !== 'undefined' && lastUploadData && lastUploadData.invoice_id) {
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(14);
+        doc.text("2. Evidence Documentation", 20, y); y += 10;
+
+        doc.setFontSize(12);
+        if (lastUploadData.file_name) {
+          doc.text(`${lastUploadData.file_name}`, 20, y); y += 10;
+        }
+
+        doc.setFontSize(11);
+        doc.text(`Ref ID: ${lastUploadData.invoice_id}`, 20, y); y += 8;
+        doc.text(`Hash:`, 20, y); y += 7;
+        doc.setFontSize(10);
+        const safeFileHash = lastUploadData.file_hash || "";
+        const splitFileHash = doc.splitTextToSize(safeFileHash, 170);
+        doc.text(splitFileHash, 20, y);
+      }
+
+      doc.save(`Receipt_TX_${txId}.pdf`);
     }
   </script>
 

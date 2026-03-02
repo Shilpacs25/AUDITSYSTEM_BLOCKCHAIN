@@ -1,0 +1,33 @@
+Log_ID | Action | SQL_Hash | Chain_Hash | Match?
+7 | Missing in SQL
+9 | Missing in SQL
+11 | Missing in SQL
+13 | Missing in SQL
+14 | Missing in SQL
+16 | Missing in SQL
+17 | Missing in SQL
+1 | Missing in SQL
+3 | Missing in SQL
+5 | Missing in SQL
+1000 | CREATED | b568b504 | bd170c0b | false
+  Data String Used: 2|Rejected|2026-02-02|5000.00|IT Services|1st quarter fees|1
+1002 | CREATED | 26ef12ae | a5d67c07 | false
+  Data String Used: 3|Verified|2026-02-02|5000.00|IT Services|fees|1
+1005 | VERIFIED | ece36a66 | cd02f014 | false
+  Data String Used: 3|Verified|2026-02-02|5000.00|IT Services|fees|1
+1008 | VERIFIED | 359eb5e4 | 1124b4ff | false
+  Data String Used: 1|Verified|2024-12-31|5000.00|Test|Fresh Start Transaction|1
+1009 | CREATED | 146a06dc | b94f5f97 | false
+  Data String Used: 4|Created|2026-02-02|99999.00|IT Services|Fees for infrastructure|1
+1010 | UPDATED | 4616dd59 | 39f88925 | false
+  Data String Used: 4|Created|2026-02-02|99999.00|IT Services|Fees for infrastructure|1
+1017 | CREATED | 41a73c7f | f70103f9 | false
+  Data String Used: 11|Created|2026-02-02|234000.00|IT Services||1
+1018 | CREATED | 035328cd | 9c035399 | false
+  Data String Used: 12|Created|2026-02-02|200000.00|IT Services||1
+1020 | CREATED | 91ef0061 | a632dd1f | false
+  Data String Used: 13|Created|2026-02-02|9000.00|IT Services||1
+1022 | CREATED | 08a2d358 | 08a2d358 | true
+1023 | CREATED | 4a5273cf | 4a5273cf | true
+1024 | UPDATED | ac4f30fb | 9c4bb4d3 | false
+  Data String Used: 15|Created|2026-02-02|54323.00|IT Services|funding for infrastructure|1

@@ -15,6 +15,7 @@ const EvidenceSchema = new mongoose.Schema({
     file_name: String,
     file_hash: String,
     storage_path: String,
+    file_data: Buffer, // ✅ Store file binary (BSON)
 
     uploaded_by: String,
     created_at: {

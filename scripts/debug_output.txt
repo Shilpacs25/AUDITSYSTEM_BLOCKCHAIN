@@ -1,0 +1,14 @@
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ???? encrypt with Dotenvx: https://dotenvx.com
+DB CONFIG USED BY NODE:
+{
+  host: '127.0.0.1',
+  user: 'audit_user',
+  password: '***',
+  database: 'audit_system'
+}
+MySQL connected successfully
+TXN 1005 Data String: 1005|Pending|6256-02-03|5855626.00|it||1
+Log 1007 (CREATED) Calculated Hash: 755da357f98376e3179501ea18c5cb779e26a0a7f380f853c6e0429f3ebe7c18
+Log 1008 (UPDATED) Calculated Hash: 2e51b0ed362d974e7ab04330fc18efda31c69e9bc0b14c890caec26be88f165d
+Log 1009 (COMMENT_ADDED) Calculated Hash: cb7135547726334b87018556b274f664f7e489be38ce61b88fb15f0c13195fd7
+Log 1010 (VERIFIED) Calculated Hash: 188619c0435354ecdd705f78a523f62afbd192fc5a5f02b244d96c68e5536259

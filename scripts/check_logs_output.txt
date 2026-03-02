@@ -1,0 +1,82 @@
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ??? audit secrets and track compliance: https://dotenvx.com/ops
+DB CONFIG USED BY NODE:
+{
+  host: '127.0.0.1',
+  user: 'audit_user',
+  password: '***',
+  database: 'audit_system'
+}
+MySQL connected successfully
+DB Logs: [
+  {
+    "Log_ID": 1007,
+    "Transaction_ID": 1005,
+    "Auditor_ID": 1,
+    "Action_Type": "CREATED",
+    "Verification_Status": null,
+    "Record_Hash": "0x0b8434ef3482e0b0c1a817a026ce3991881a173a00921042d9f84d39bc356e2b",
+    "Timestamp": "2026-02-04T09:54:54.000Z"
+  },
+  {
+    "Log_ID": 1008,
+    "Transaction_ID": 1005,
+    "Auditor_ID": 999,
+    "Action_Type": "UPDATED",
+    "Verification_Status": "Match",
+    "Record_Hash": "0xde005777f1d2fdc919dc540399aaa8810d6e69c469f0e368996cb07be5edfd09",
+    "Timestamp": "2026-02-04T09:55:06.000Z"
+  },
+  {
+    "Log_ID": 1009,
+    "Transaction_ID": 1005,
+    "Auditor_ID": 999,
+    "Action_Type": "COMMENT_ADDED",
+    "Verification_Status": null,
+    "Record_Hash": null,
+    "Timestamp": "2026-02-04T09:58:13.000Z"
+  },
+  {
+    "Log_ID": 1010,
+    "Transaction_ID": 1005,
+    "Auditor_ID": 999,
+    "Action_Type": "VERIFIED",
+    "Verification_Status": "Match",
+    "Record_Hash": "0xd1ecedd0c50e6910a1401dcdf828551531f27e28bdfe123ed349d19757a1b668",
+    "Timestamp": "2026-02-04T09:58:18.000Z"
+  }
+]
+[Blockchain] Singleton reloaded: 0x1a1F003A6b81117e739A2041F9A86a406e074c0c
+Chain Logs: [
+  [
+    "1007",
+    "CREATED",
+    "755da357f98376e3179501ea18c5cb779e26a0a7f380f853c6e0429f3ebe7c18",
+    "NO_EVIDENCE",
+    "1770198894",
+    "0xc0Ff134C524A213A6c451f62A253f2854C63e8d5"
+  ],
+  [
+    "1008",
+    "UPDATED",
+    "b183b1890d28526801ba0999586ead6f35cd704100519651e301953ff1db9f99",
+    "64065706d15cfb7544a260b629cf26c698f51163a8070a21b412166bab7160dd",
+    "1770198906",
+    "0xc0Ff134C524A213A6c451f62A253f2854C63e8d5"
+  ],
+  [
+    "1009",
+    "COMMENT_ADDED",
+    "cb7135547726334b87018556b274f664f7e489be38ce61b88fb15f0c13195fd7",
+    "OK",
+    "1770199093",
+    "0xc0Ff134C524A213A6c451f62A253f2854C63e8d5"
+  ],
+  [
+    "1010",
+    "VERIFIED",
+    "188619c0435354ecdd705f78a523f62afbd192fc5a5f02b244d96c68e5536259",
+    "OK",
+    "1770199098",
+    "0xc0Ff134C524A213A6c451f62A253f2854C63e8d5"
+  ]
+]
